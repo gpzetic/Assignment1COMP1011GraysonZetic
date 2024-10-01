@@ -1,30 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.TableController">
+<VBox xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.TableController">
    <children>
-      <VBox prefHeight="400.0" prefWidth="600.0">
-         <children>
-            <TableView fx:id="tableView" VBox.vgrow="ALWAYS">
-              <columns>
-                <TableColumn fx:id="idColumn" prefWidth="58.0" text="ID" />
-                <TableColumn fx:id="nameColumn" prefWidth="172.0" text="Name" />
-                  <TableColumn fx:id="revenueColumn" minWidth="0.0" prefWidth="152.0" text="Revenue" />
-              </columns>
-            </TableView>
-            <Button maxHeight="-Infinity" mnemonicParsing="false" onAction="#handleGoToScene1" prefHeight="75.0" prefWidth="610.0" text="Graph View" textAlignment="RIGHT">
+            <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+              <tabs>
+                <Tab text="Revenue by Client">
+                  <content>
+                              <TableView fx:id="tableView">
+                                <columns>
+                                  <TableColumn fx:id="idColumn" prefWidth="69.0" text="Client ID" />
+                                  <TableColumn fx:id="nameColumn" prefWidth="161.0" text="Name" />
+                                    <TableColumn fx:id="revenueColumn" minWidth="0.0" prefWidth="152.0" text="Revenue" />
+                                </columns>
+                              </TableView>
+                  </content>
+                </Tab>
+                <Tab text="All Invoices">
+                  <content>
+                              <TableView fx:id="tableView2">
+                                 <columns>
+                                    <TableColumn fx:id="idColumn2" prefWidth="58.0" text="ID" />
+                                    <TableColumn fx:id="nameColumn2" prefWidth="172.0" text="Company" />
+                                    <TableColumn fx:id="revenueColumn2" minWidth="0.0" prefWidth="152.0" text="Revenue" />
+                                    <TableColumn fx:id="dateColumn2" minWidth="0.0" prefWidth="153.0" text="Date" />
+                                 </columns>
+                              </TableView>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+            <Button maxHeight="-Infinity" mnemonicParsing="false" onAction="#handleGoToScene1" text="Graph View" textAlignment="RIGHT">
                <font>
-                  <Font size="40.0" />
+                  <Font size="28.0" />
                </font>
             </Button>
          </children>
       </VBox>
-   </children>
-</AnchorPane>

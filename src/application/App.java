@@ -25,8 +25,8 @@ public class App extends Application {
         FXMLLoader fxmlLoader2 = new FXMLLoader(
             App.class.getResource("/table.fxml")
         );
-        scene1 = new Scene(fxmlLoader1.load(), 600, 400);
-        scene2 = new Scene(fxmlLoader2.load(), 600, 400);
+        scene1 = new Scene(fxmlLoader1.load(), 1200, 800);
+        scene2 = new Scene(fxmlLoader2.load(), 1200, 800);
         this.stage.setTitle("Client");
         this.stage.setScene(scene1);
         this.stage.show();
