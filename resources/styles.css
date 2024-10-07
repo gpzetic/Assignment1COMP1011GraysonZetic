@@ -1,0 +1,50 @@
+.main {
+    -fx-background-color: #8888b5;
+    -fx-color: #9f9066;
+}
+.sec {
+    -fx-background-color: transparent;
+    -fx-border-size: 2px;
+    -fx-border-color: #858888;
+}
+.tri {
+    -fx-background-color: #888787;
+}
+.qua {
+    -fx-color: #33f3f3;
+}
+.chart {
+    -fx-background-color: #8888b5; /* Match main background color */
+}
+.table-view {
+    -fx-background-color: #8888b5; /* Match main background color */
+    -fx-border-color: #858888; /* Match border color */
+}
+.table-view .table-row-cell {
+    -fx-background-color: transparent; /* Ensure rows are transparent */
+}
+.table-view .table-row-cell:hover {
+    -fx-background-color: #888787; /* Highlight on hover */
+}
+.table-view .column-header {
+    -fx-background-color: #8888b5; /* Header background */
+    -fx-text-fill: #33f3f3; /* Header text color */
+}
+.tab-pane {
+    -fx-background-color: #8888b5; /* Background color for TabPane */
+}
+
+/* Styles for individual tabs */
+.tab {
+    -fx-background-color: #8888b5; /* Tab background */
+    -fx-text-fill: #33f3f3; /* Tab text color */
+}
+
+.tab:hover {
+    -fx-background-color: #888787; /* Hover effect for tabs */
+}
+
+.tab:selected {
+    -fx-background-color: #888787; /* Background for selected tab */
+    -fx-text-fill: #ffffff; /* Text color for selected tab */
+}

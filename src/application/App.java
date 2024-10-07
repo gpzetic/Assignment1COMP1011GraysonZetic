@@ -1,6 +1,8 @@
 package application;
 
+import application.controllers.DBUtility;
 import java.io.IOException;
+import java.sql.SQLException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,6 +21,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         this.stage = stage;
+        DBUtility.connect();
         FXMLLoader fxmlLoader1 = new FXMLLoader(
             App.class.getResource("/app-view.fxml")
         );
@@ -30,6 +33,11 @@ public class App extends Application {
         this.stage.setTitle("Client");
         this.stage.setScene(scene1);
         this.stage.show();
+        try {
+            DBUtility.connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
