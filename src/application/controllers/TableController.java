@@ -76,32 +76,25 @@ public class TableController {
 
             data = FXCollections.observableArrayList();
             data2 = FXCollections.observableArrayList();
-            try (
-                Connection connection = DriverManager.getConnection(
-                    url,
-                    user,
-                    password
-                );
-                Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery(
+            try {
+                DBUtility.queryData(
                     "select clients.*, SUM(r.revenue) AS total_revenue from clients join revenue r on clients.id = r.companyId GROUP by clients.id;"
                 );
-                Statement statement2 = connection.createStatement();
-                ResultSet resultSet2 = statement2.executeQuery(
-                    "select *, c.company as comp from revenue join clients c on c.id = companyId"
-                )
-            ) {
-                while (resultSet.next()) {
-                    int id = resultSet.getInt("id");
-                    String name = resultSet.getString("name");
-                    int revenue = resultSet.getInt("total_revenue");
+                while (DBUtility.rs.next()) {
+                    int id = DBUtility.rs.getInt("id");
+                    String name = DBUtility.rs.getString("name");
+                    int revenue = DBUtility.rs.getInt("total_revenue");
                     data.add(new Client(id, name, revenue));
                 }
-                while (resultSet2.next()) {
-                    int id = resultSet2.getInt("id");
-                    String name = resultSet2.getString("comp");
-                    int revenue = resultSet2.getInt("revenue");
-                    String date = resultSet2.getString("date");
+                DBUtility.queryData(
+                    "select *, c.company as comp from revenue join clients c on c.id = companyId"
+                );
+
+                while (DBUtility.rs.next()) {
+                    int id = DBUtility.rs.getInt("id");
+                    String name = DBUtility.rs.getString("comp");
+                    int revenue = DBUtility.rs.getInt("revenue");
+                    String date = DBUtility.rs.getString("date");
                     data2.add(new Client(id, name, revenue, date));
                 }
             } catch (Exception e) {

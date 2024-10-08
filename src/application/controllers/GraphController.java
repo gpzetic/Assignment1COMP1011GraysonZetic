@@ -50,36 +50,34 @@ public class GraphController {
             XYChart.Series<String, Number> series2 = new XYChart.Series<>();
             series2.setName("Revenue Over Time");
 
-            DBUtility dbu = new DBUtility();
-            DBUtility dbu2 = new DBUtility();
+            ResultSet rs;
 
-            try (
-                ResultSet rs = DBUtility.connection
-                    .createStatement()
-                    .executeQuery(
-                        "SELECT clients.name, sum(r.revenue) as rev FROM clients join revenue r on clients.id = r.companyId group by clients.id"
-                    );
-                ResultSet rs2 = DBUtility.connection
-                    .createStatement()
-                    .executeQuery(
-                        "SELECT date, sum(revenue) as rev FROM revenue group by date order by date"
-                    )
-            ) {
-                while (rs.next()) {
-                    int rev = rs.getInt("rev");
-                    String name = rs.getString("name");
+            try {
+                DBUtility.queryData(
+                    "SELECT clients.name, sum(r.revenue) as rev FROM clients join revenue r on clients.id = r.companyId group by clients.id"
+                );
+                while (DBUtility.rs.next()) {
+                    int rev = DBUtility.rs.getInt("rev");
+                    String name = DBUtility.rs.getString("name");
                     series
                         .getData()
                         .add(new XYChart.Data<String, Number>(name, rev));
                 }
-                while (rs2.next()) {
-                    int rev = rs2.getInt("rev");
-                    String date = rs2.getString("date");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                DBUtility.queryData(
+                    "SELECT date, sum(revenue) as rev FROM revenue group by date order by date"
+                );
+                while (DBUtility.rs.next()) {
+                    int rev = DBUtility.rs.getInt("rev");
+                    String date = DBUtility.rs.getString("date");
                     series2
                         .getData()
                         .add(new XYChart.Data<String, Number>(date, rev));
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
 

@@ -9,6 +9,7 @@ public class DBUtility {
     private static String password = "student";
 
     public static Connection connection;
+    public static ResultSet rs;
 
     public static void connect() {
         try {
@@ -18,15 +19,22 @@ public class DBUtility {
         }
     }
 
-    public ResultSet getResults(String s) {
-        try (
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(s)
-        ) {
-            return resultSet;
-        } catch (Exception e) {
+    public static void queryData(String query) {
+        try {
+            rs = connection.createStatement().executeQuery(query);
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
     }
+    // public ResultSet getResults(String s) {
+    //     try (
+    //         Statement statement = connection.createStatement();
+    //         ResultSet resultSet = statement.executeQuery(s)
+    //     ) {
+    //         return resultSet;
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
+    //     return null;
+    // }
 }
