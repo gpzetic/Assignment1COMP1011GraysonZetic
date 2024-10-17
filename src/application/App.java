@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -30,6 +31,8 @@ public class App extends Application {
         );
         scene1 = new Scene(fxmlLoader1.load(), 1200, 800);
         scene2 = new Scene(fxmlLoader2.load(), 1200, 800);
+        this.stage.getIcons()
+            .add(new Image(getClass().getResourceAsStream("/money.png")));
         this.stage.setTitle("Client");
         this.stage.setScene(scene1);
         this.stage.show();
