@@ -16,6 +16,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+/**
+ * Controller class for managing table views of client data.
+ * This class handles the initialization and population of table views
+ * with client information retrieved from a database.
+ */
+
 public class TableController {
 
     private String url = "jdbc:mysql://localhost:3306/clients";
@@ -53,11 +59,28 @@ public class TableController {
     private ObservableList<Client> data2;
 
     @FXML
+    /**
+     * Handles the action of switching to scene1.
+     * This method is called when the user wants to navigate back to the first scene.
+     *
+     * @throws Exception if there's an error during scene transition
+     */
+
     private void handleGoToScene1() throws Exception {
         App.stage.setScene(App.scene1);
     }
 
     @FXML
+    /**
+     * Initializes the table views with client data.
+     * This method sets up the table columns, retrieves data from the database,
+     * and populates the table views with the fetched information.
+     * It handles two different queries:
+     * 1. Aggregated client data with total revenue
+     * 2. Detailed revenue data for each client
+     * If any exception occurs during data retrieval, it will be printed to the stack trace.
+     */
+
     public void initialize() {
         if (idColumn != null) {
             idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));

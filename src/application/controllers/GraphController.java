@@ -18,6 +18,12 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+/**
+ * Controller class for handling graph-related operations in the application.
+ * This class manages the display and updating of line charts showing revenue data.
+ * It interacts with the database to fetch and visualize client revenue information.
+ */
+
 public class GraphController {
 
     private String url = "jdbc:mysql://localhost:3306/clients";
@@ -37,11 +43,25 @@ public class GraphController {
     private NumberAxis yAxis;
 
     @FXML
+    /**
+     * Handles the transition to Scene 2.
+     * This method is called when the user needs to switch to the second scene of the application.
+     *
+     * @throws Exception if there's an error during the scene transition
+     */
+
     private void handleGoToScene2() throws Exception {
         App.stage.setScene(App.scene2);
     }
 
     @FXML
+    /**
+     * Initializes the graph controller by populating the line charts with data.
+     * This method is automatically called after the FXML file has been loaded.
+     * It queries the database for client revenue data and revenue over time,
+     * then adds this data to the respective line charts for visualization.
+     */
+
     public void initialize() {
         if (lineChart != null) {
             XYChart.Series<String, Number> series = new XYChart.Series<>();

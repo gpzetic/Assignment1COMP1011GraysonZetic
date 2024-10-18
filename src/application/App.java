@@ -9,6 +9,13 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+/**
+ * The main application class for the client management system.
+ * This class extends JavaFX's Application class and is responsible for
+ * initializing the user interface, setting up scenes, and managing
+ * the primary stage of the application.
+ */
+
 public class App extends Application {
 
     public static Scene scene1;
@@ -18,6 +25,16 @@ public class App extends Application {
     public static FXMLLoader fxmlLoader2;
 
     public static Stage stage;
+
+    /**
+     * Starts the JavaFX application.
+     * This method is called after the init() method has returned, and after
+     * the system is ready for the application to begin running.
+     *
+     * @param stage the primary stage for this application, onto which
+     * the application scene can be set.
+     * @throws IOException if there is an error loading the FXML files.
+     */
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -42,6 +59,14 @@ public class App extends Application {
             e.printStackTrace();
         }
     }
+
+    /**
+     * The main entry point for the application.
+     * This method launches the JavaFX application.
+     *
+     * @param args command line arguments passed to the application.
+     *             These are not used in this application.
+     */
 
     public static void main(String[] args) {
         launch();
