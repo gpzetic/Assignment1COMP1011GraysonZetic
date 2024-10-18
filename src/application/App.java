@@ -53,6 +53,11 @@ public class App extends Application {
         this.stage.setTitle("Client");
         this.stage.setScene(scene1);
         this.stage.show();
+        String sqlStatements = DBUtility.csvToSql(
+            getClass().getResourceAsStream("/sample_clients.csv"),
+            "clientstest"
+        );
+        System.out.println(sqlStatements);
         try {
             DBUtility.connection.close();
         } catch (SQLException e) {

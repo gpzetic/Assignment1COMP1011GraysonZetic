@@ -1,5 +1,9 @@
 package application.controllers;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.*;
 
 /**
@@ -43,6 +47,60 @@ public class DBUtility {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Converts a CSV file to SQL CREATE TABLE and INSERT statements.
+     *
+     * @param csvFile The path to the CSV file
+     * @param tableName The name of the table to be created
+     * @return A string containing the CREATE TABLE statement followed by INSERT statements
+     */
+    public static String csvToSql(InputStream csvFile, String tableName) {
+        StringBuilder sqlStatements = new StringBuilder();
+        try (
+            BufferedReader br = new BufferedReader(
+                new InputStreamReader(csvFile)
+            )
+        ) {
+            String line;
+            String[] headers = br.readLine().split(",");
+
+            // Generate CREATE TABLE statement
+            sqlStatements
+                .append("CREATE TABLE ")
+                .append(tableName)
+                .append(" (");
+            for (int i = 0; i < headers.length; i++) {
+                sqlStatements.append(headers[i]).append(" TEXT");
+                if (i < headers.length - 1) sqlStatements.append(", ");
+            }
+            sqlStatements.append(");\n\n");
+
+            // Generate INSERT statements
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                sqlStatements
+                    .append("INSERT INTO ")
+                    .append(tableName)
+                    .append(" (");
+                sqlStatements
+                    .append(String.join(", ", headers))
+                    .append(") VALUES (");
+                for (int i = 0; i < values.length; i++) {
+                    sqlStatements
+                        .append("'")
+                        .append(values[i].replace("'", "''"))
+                        .append("'");
+                    if (i < values.length - 1) sqlStatements.append(", ");
+                }
+                sqlStatements.append(");\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Error processing CSV file: " + e.getMessage();
+        }
+        return sqlStatements.toString();
     }
     // public ResultSet getResults(String s) {
     //     try (

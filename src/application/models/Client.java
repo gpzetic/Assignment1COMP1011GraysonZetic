@@ -1,5 +1,7 @@
 package application.models;
 
+import java.util.Date;
+
 /**
  * Represents a client in the system.
  * This class holds information about a client including their ID, name, revenue,
@@ -96,7 +98,7 @@ public class Client {
                 "Hire date cannot be in the future."
             );
         }
-        this.date = date;
+        this.date = String.valueOf(date);
     }
 
     /**
