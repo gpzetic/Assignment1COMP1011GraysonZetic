@@ -53,6 +53,7 @@ public class App extends Application {
         this.stage.setTitle("Client");
         this.stage.setScene(scene1);
         this.stage.show();
+        // This is the bonus functionality
         String sqlStatements = DBUtility.csvToSql(
             getClass().getResourceAsStream("/sample_clients.csv"),
             "clientstest"
